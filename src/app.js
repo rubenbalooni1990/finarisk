@@ -1,5 +1,5 @@
 async function loadConfig(){
-  const res = await fetch('./config/config.json');
+  const res = await fetch('./config/config.json?v=3');
   return await res.json();
 }
 
@@ -64,10 +64,17 @@ function validateCustomerSection(){
 }
 
 // ===== Scoring =====
+function parseWeightToNumber(w){
+  if(w === null || w === undefined) return 0;
+  // Handles 10, "10", "10%"
+  const m = String(w).match(/[\d.]+/);
+  return m ? Number(m[0]) : 0;
+}
+
 function computeScore(tierDef, selections){
   let total = 0;
   for(const [param, def] of Object.entries(tierDef)){
-    const w = Number(def.weight ?? 0);
+    const w = parseWeightToNumber(def.weight);
     const choice = selections[param];
     const s = Number(def.options[choice] ?? 0);
     total += (s * (w/100));
@@ -205,8 +212,8 @@ function buildParamsTable(tierKey, tierDef){
 
     // Weight with %
     const tdW = document.createElement('td');
-    const w = (def.weight ?? '');
-    tdW.textContent = (w === '' || w === null) ? '—' : `${Number(w).toString()}%`;
+    const wNum = parseWeightToNumber(def.weight);
+    tdW.textContent = (wNum === 0 && (def.weight === null || def.weight === undefined || def.weight === '')) ? '—' : `${wNum}%`;
     tdW.className = 'right';
     tr.appendChild(tdW);
 
@@ -246,8 +253,8 @@ function buildParamsTable(tierKey, tierDef){
       const choice = sel.value;
       const optScore = Number(def.options[choice] ?? 0);
       tdScore.textContent = (choice === '' ? '—' : optScore.toFixed(2));
-      const wNum = Number(def.weight ?? 0);
-      const wscore = (optScore * (wNum/100));
+      const wNum2 = parseWeightToNumber(def.weight);
+      const wscore = (optScore * (wNum2/100));
       tdWScore.textContent = (choice === '' ? '—' : wscore.toFixed(2));
       recalcTotals();
     });
@@ -285,7 +292,6 @@ function recalcTotals(){
   const tiers = cfg.tiers || {};
   const tierSelect = document.getElementById('tierSelect');
 
-  // Populate tier dropdown (keep original keys as-is)
   Object.keys(tiers).forEach(name => {
     const opt = document.createElement('option');
     opt.value = name;
@@ -301,12 +307,10 @@ function recalcTotals(){
   }
   tierSelect.addEventListener('change', onTierChange);
 
-  // Recalc on avg sales input
   document.getElementById('avgSales').addEventListener('input', () => {
     if(validateCustomerSection()) recalcTotals();
   });
 
-  // Live-validate customer inputs
   ['crNumber','unifiedNumber','vatNumber','avgSales'].forEach(id => {
     const el = document.getElementById(id);
     el.addEventListener('input', () => {
@@ -315,7 +319,6 @@ function recalcTotals(){
     });
   });
 
-  // Export JSON
   document.getElementById('exportJsonBtn').addEventListener('click', () => {
     if(!validateCustomerSection()) return;
     const payload = {
@@ -336,7 +339,6 @@ function recalcTotals(){
     setTimeout(()=>URL.revokeObjectURL(url), 4000);
   });
 
-  // Download PDF (uses browser print dialog)
   document.getElementById('printBtn').addEventListener('click', () => {
     if(!validateCustomerSection()) return;
     window.print();
@@ -344,7 +346,6 @@ function recalcTotals(){
 
   // Initial state
   validateCustomerSection();
-  // If config has tiers, preselect first (will remain disabled until valid details entered)
   const tierKeys = Object.keys(tiers);
   if(tierKeys.length){
     tierSelect.value = tierKeys[0];
