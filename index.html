@@ -6,7 +6,7 @@
   <title>SilQ Risk Score Calculator</title>
   <link rel="stylesheet" href="./src/styles.css">
   <style>
-    /* Print-friendly so the whole page exports cleanly with Ctrl/Cmd+P */
+    /* Print-friendly so the whole page exports cleanly */
     @media print {
       header, .controls button#printHint { display:none !important; }
       body { background: #fff; }
@@ -25,12 +25,33 @@
     <section class="card">
       <h2>Customer Details</h2>
       <div class="grid grid-2">
-        <div class="row"><label for="custName">Customer Name</label><input id="custName" placeholder="e.g., Farad Trading Company"></div>
-        <div class="row"><label for="crNumber">CR Number</label><input id="crNumber" placeholder="e.g., 2050033949"></div>
-        <div class="row"><label for="unifiedNumber">Unified Number</label><input id="unifiedNumber" placeholder="e.g., 7001750525"></div>
-        <div class="row"><label for="vatNumber">VAT Registration Number</label><input id="vatNumber" placeholder="e.g., 312419924300003"></div>
-        <div class="row"><label for="avgSales">Avg Monthly Sales (SAR)</label><input id="avgSales" type="number" min="0" step="0.01" placeholder="e.g., 250000"></div>
+        <div class="row">
+          <label for="custName">Customer Name</label>
+          <input id="custName" placeholder="e.g., Farad Trading Company">
+          <div class="error" id="err_custName"></div>
+        </div>
+        <div class="row">
+          <label for="crNumber">CR Number</label>
+          <input id="crNumber" inputmode="numeric" maxlength="10" placeholder="10 digits">
+          <div class="error" id="err_crNumber"></div>
+        </div>
+        <div class="row">
+          <label for="unifiedNumber">Unified Number</label>
+          <input id="unifiedNumber" inputmode="numeric" maxlength="10" placeholder="10 digits">
+          <div class="error" id="err_unifiedNumber"></div>
+        </div>
+        <div class="row">
+          <label for="vatNumber">VAT Registration Number</label>
+          <input id="vatNumber" inputmode="numeric" maxlength="15" placeholder="15 digits">
+          <div class="error" id="err_vatNumber"></div>
+        </div>
+        <div class="row">
+          <label for="avgSales">Avg Monthly Sales (SAR)</label>
+          <input id="avgSales" type="number" min="0" step="0.01" placeholder="e.g., 250000">
+          <div class="error" id="err_avgSales"></div>
+        </div>
       </div>
+      <p class="note">Validation rules: CR Number = 10 digits; Unified Number = 10 digits; VAT Registration Number = 15 digits. Numbers only.</p>
     </section>
 
     <!-- Tier Section -->
@@ -38,12 +59,13 @@
       <h2>Tier Selection</h2>
       <div class="row">
         <label for="tierSelect">Tier</label>
-        <select id="tierSelect"></select>
+        <select id="tierSelect" disabled></select>
       </div>
+      <p class="note" id="tierLockNote">Complete valid Customer Details to enable tier selection.</p>
     </section>
 
     <!-- Parameters Table -->
-    <section id="paramsSection" class="card">
+    <section id="paramsSection" class="card disabled">
       <h2>Parameters</h2>
       <div class="table-wrap">
         <table id="paramsTable">
@@ -86,8 +108,8 @@
     <!-- Actions -->
     <section class="sticky-actions">
       <div class="controls">
-        <button id="exportJsonBtn">Export JSON</button>
-        <button id="printBtn">Download PDF</button>
+        <button id="exportJsonBtn" disabled>Export JSON</button>
+        <button id="printBtn" disabled>Download PDF</button>
         <button id="printHint" title="Tip: You can also press Ctrl/Cmd+P">Print shortcut</button>
       </div>
     </section>
