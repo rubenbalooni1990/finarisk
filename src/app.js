@@ -1,5 +1,5 @@
 async function loadConfig(){
-  const res = await fetch('./config/config.json?v=3');
+  const res = await fetch('./config/config.json?v=4');
   return await res.json();
 }
 
@@ -63,21 +63,39 @@ function validateCustomerSection(){
   return ok;
 }
 
-// ===== Scoring =====
-function parseWeightToNumber(w){
-  if(w === null || w === undefined) return 0;
-  // Handles 10, "10", "10%"
-  const m = String(w).match(/[\d.]+/);
-  return m ? Number(m[0]) : 0;
+// ===== Weight parsing & formatting =====
+function parseWeightPercent(w){
+  // Accepts: 0.2 (meaning 20%), "0.2", 10, "10", "10%"
+  if(w === null || w === undefined || w === '') return 0;
+  const s = String(w).trim();
+  if(s.endsWith('%')){
+    const n = Number(s.slice(0, -1).trim());
+    return isNaN(n) ? 0 : n;
+  }
+  const n = Number(s);
+  if(isNaN(n)) return 0;
+  // If value looks like a fraction (<=1), treat it as proportion and convert to percent
+  return n <= 1 ? n * 100 : n;
 }
 
+function formatPercent(n){
+  // n is a percent number (e.g., 20 means 20%)
+  if(n === null || n === undefined) return '—';
+  const val = Number(n);
+  if(isNaN(val)) return '—';
+  // Show up to 2 decimals, but strip trailing zeros
+  const fixed = Math.round(val * 100) / 100;
+  return `${fixed}%`;
+}
+
+// ===== Scoring =====
 function computeScore(tierDef, selections){
   let total = 0;
   for(const [param, def] of Object.entries(tierDef)){
-    const w = parseWeightToNumber(def.weight);
+    const wPct = parseWeightPercent(def.weight); // percent number
     const choice = selections[param];
     const s = Number(def.options[choice] ?? 0);
-    total += (s * (w/100));
+    total += (s * (wPct/100));
   }
   return total; // 0..10
 }
@@ -210,10 +228,10 @@ function buildParamsTable(tierKey, tierDef){
     tdParam.textContent = param;
     tr.appendChild(tdParam);
 
-    // Weight with %
+    // Weight with % (handles decimals and whole numbers)
     const tdW = document.createElement('td');
-    const wNum = parseWeightToNumber(def.weight);
-    tdW.textContent = (wNum === 0 && (def.weight === null || def.weight === undefined || def.weight === '')) ? '—' : `${wNum}%`;
+    const wPct = parseWeightPercent(def.weight);
+    tdW.textContent = (def.weight === null || def.weight === undefined || def.weight === '') ? '—' : formatPercent(wPct);
     tdW.className = 'right';
     tr.appendChild(tdW);
 
@@ -253,8 +271,8 @@ function buildParamsTable(tierKey, tierDef){
       const choice = sel.value;
       const optScore = Number(def.options[choice] ?? 0);
       tdScore.textContent = (choice === '' ? '—' : optScore.toFixed(2));
-      const wNum2 = parseWeightToNumber(def.weight);
-      const wscore = (optScore * (wNum2/100));
+      const wPct2 = parseWeightPercent(def.weight);
+      const wscore = (optScore * (wPct2/100));
       tdWScore.textContent = (choice === '' ? '—' : wscore.toFixed(2));
       recalcTotals();
     });
