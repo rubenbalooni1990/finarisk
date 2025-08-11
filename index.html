@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SilQ Risk Score Calculator</title>
+  <link rel="stylesheet" href="./src/styles.css">
+  <style>
+    /* Print-friendly so the whole page exports cleanly with Ctrl/Cmd+P */
+    @media print {
+      header, .controls button#printHint { display:none !important; }
+      body { background: #fff; }
+      .card { break-inside: avoid; box-shadow: none; border-color:#bbb; }
+      .sticky-actions { display:none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>SilQ Risk Score Calculator</h1>
+  </header>
+
+  <main id="calculator">
+    <!-- Customer Section -->
+    <section class="card">
+      <h2>Customer Details</h2>
+      <div class="grid grid-2">
+        <div class="row"><label for="custName">Customer Name</label><input id="custName" placeholder="e.g., Farad Trading Company"></div>
+        <div class="row"><label for="crNumber">CR Number</label><input id="crNumber" placeholder="e.g., 2050033949"></div>
+        <div class="row"><label for="unifiedNumber">Unified Number</label><input id="unifiedNumber" placeholder="e.g., 7001750525"></div>
+        <div class="row"><label for="vatNumber">VAT Registration Number</label><input id="vatNumber" placeholder="e.g., 312419924300003"></div>
+        <div class="row"><label for="avgSales">Avg Monthly Sales (SAR)</label><input id="avgSales" type="number" min="0" step="0.01" placeholder="e.g., 250000"></div>
+      </div>
+    </section>
+
+    <!-- Tier Section -->
+    <section class="card">
+      <h2>Tier Selection</h2>
+      <div class="row">
+        <label for="tierSelect">Tier</label>
+        <select id="tierSelect"></select>
+      </div>
+    </section>
+
+    <!-- Parameters Table -->
+    <section id="paramsSection" class="card">
+      <h2>Parameters</h2>
+      <div class="table-wrap">
+        <table id="paramsTable">
+          <thead>
+            <tr>
+              <th style="width:32%">Parameter</th>
+              <th style="width:12%">Weight (%)</th>
+              <th style="width:28%">Option</th>
+              <th style="width:12%">Score</th>
+              <th style="width:16%">Weighted Score</th>
+            </tr>
+          </thead>
+          <tbody id="paramRows"></tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4" class="right"><strong>Total Weighted Score (Compute Score)</strong></td>
+              <td><strong id="totalWeightedScore">—</strong></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <p class="note">Compute Score = Sum of (Option Score × Weight ÷ 100). Scale: 0–10.</p>
+    </section>
+
+    <!-- Limit Assignment -->
+    <section class="card">
+      <h2>Limit Assignment</h2>
+      <div class="grid grid-2">
+        <div class="result">
+          <div class="label">Weighted Score (0–10)</div>
+          <div id="scoreOut" class="value">—</div>
+        </div>
+        <div class="result">
+          <div class="label">Assigned Limit (SAR)</div>
+          <div id="limitOut" class="value">—</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Actions -->
+    <section class="sticky-actions">
+      <div class="controls">
+        <button id="exportJsonBtn">Export JSON</button>
+        <button id="printBtn">Download PDF</button>
+        <button id="printHint" title="Tip: You can also press Ctrl/Cmd+P">Print shortcut</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Config-driven • Static app • Ready for GitHub Pages</p>
+  </footer>
+
+  <a id="downloadLink" style="display:none"></a>
+  <script src="./src/app.js"></script>
+</body>
+</html>

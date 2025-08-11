@@ -1,0 +1,478 @@
+{
+  "tiers": {
+    "Tier 1 : SCF-100k": {
+      "Business Age (Months)": {
+        "weight": 0.3,
+        "options": {
+          "≥60": 10.0,
+          "48–59": 9.0,
+          "36–47": 8.0,
+          "24–35": 6.0,
+          "12–23": 4.0,
+          "6–11": 2.0,
+          "<6": 0.0
+        }
+      },
+      "CR Status (Active/Expired)": {
+        "weight": 0.1,
+        "options": {
+          "Active": 10.0,
+          "Expired": 0.0
+        }
+      },
+      "Last Transaction Recency with Sary/SilQ": {
+        "weight": 0.15,
+        "options": {
+          "≤30 days": 10.0,
+          "31–60 days": 7.0,
+          "61–90 days": 4.0,
+          ">90 days": 0.0
+        }
+      },
+      "Legal Structure": {
+        "weight": 0.2,
+        "options": {
+          "JSC": 10.0,
+          "LLC": 8.0,
+          "1-Person LLC": 6.0,
+          "Partnership": 4.0,
+          "Establishment": 2.0,
+          "Unknown": 0.0
+        }
+      },
+      "Owner–Manager Match": {
+        "weight": 0.1,
+        "options": {
+          "Full Match": 10.0,
+          "Partial Match": 6.0,
+          "Mismatch": 0.0
+        }
+      },
+      "Relationship with Sary/SilQ (Based on No. of Transactions Only)": {
+        "weight": 0.15,
+        "options": {
+          "≥20": 10.0,
+          "11–19": 7.0,
+          "5–10": 4.0,
+          "<5": 0.0
+        }
+      }
+    },
+    "Tier 2 : SCF - 1M": {
+      "Business Age (Months)": {
+        "weight": 0.1,
+        "options": {
+          "≥60": 10.0,
+          "48–59": 9.0,
+          "36–47": 8.0,
+          "24–35": 6.0,
+          "12–23": 4.0,
+          "6–11": 2.0,
+          "<6": 0.0
+        }
+      },
+      "CR Status (Active/Expired)": {
+        "weight": 0.05,
+        "options": {
+          "Active": 10.0,
+          "Expired": 0.0
+        }
+      },
+      "Debt Capacity-to-Sales Ratio": {
+        "weight": 0.05,
+        "options": {
+          "≤ 0.2x": 10.0,
+          "0.21x – 0.5x": 6.0,
+          "0.51x – 1.0x": 3.0,
+          "> 1.0x": 0.0,
+          "No information available": 5.0
+        }
+      },
+      "Document Expiry Risk": {
+        "weight": 0.05,
+        "options": {
+          "> 90 days validity": 10.0,
+          "30–90 days": 6.0,
+          "<30 days": 2.0,
+          "Expired": 0.0
+        }
+      },
+      "Last Transaction Recency with Sary/SilQ": {
+        "weight": 0.125,
+        "options": {
+          "≤30 days": 10.0,
+          "31–60 days": 7.0,
+          "61–90 days": 4.0,
+          ">90 days": 0.0
+        }
+      },
+      "Legal Structure": {
+        "weight": 0.1,
+        "options": {
+          "JSC": 10.0,
+          "LLC": 8.0,
+          "1-Person LLC": 6.0,
+          "Partnership": 4.0,
+          "Establishment": 2.0,
+          "Unknown": 0.0
+        }
+      },
+      "National Address Match": {
+        "weight": 0.05,
+        "options": {
+          "Full": 10.0,
+          "Minor Mismatch": 6.0,
+          "Different": 0.0
+        }
+      },
+      "Owner–Manager Match": {
+        "weight": 0.05,
+        "options": {
+          "Full Match": 10.0,
+          "Partial Match": 6.0,
+          "Mismatch": 0.0
+        }
+      },
+      "Relationship with Sary/SilQ (Based on No. of Transactions Only)": {
+        "weight": 0.125,
+        "options": {
+          "≥20": 10.0,
+          "11–19": 7.0,
+          "5–10": 4.0,
+          "<5": 0.0
+        }
+      },
+      "SIMAH (Business) – Defaults": {
+        "weight": 0.1,
+        "options": {
+          "No defaults ever reported": 10.0,
+          "Defaults occurred in past but now settled": 5.0,
+          "Currently defaulted": 0.0,
+          "Blank SIMAH report": 5.0
+        }
+      },
+      "SIMAH (Business) – Facility-to-Lender Ratio": {
+        "weight": 0.1,
+        "options": {
+          "≤1.5": 10.0,
+          "1.6–2.5": 6.0,
+          ">2.5": 3.0
+        }
+      },
+      "SIMAH (Owner) – Score": {
+        "weight": 0.1,
+        "options": {
+          "≥750": 10.0,
+          "700–749": 8.0,
+          "650–699": 6.0,
+          "600–649": 4.0,
+          "550–599": 2.0,
+          "<550": 0.0,
+          "Score Not Available": 4.0
+        }
+      }
+    },
+    "Tier 3 : SCF > 1M": {
+      "Business Age (Months)": {
+        "weight": 0.2,
+        "options": {
+          "≥60": 10.0,
+          "48–59": 9.0,
+          "36–47": 8.0,
+          "24–35": 6.0,
+          "12–23": 4.0,
+          "6–11": 2.0,
+          "<6": 0.0
+        }
+      },
+      "CR Status (Active/Expired)": {
+        "weight": 0.02,
+        "options": {
+          "Active": 10.0,
+          "Expired": 0.0
+        }
+      },
+      "Debt Capacity-to-Sales Ratio": {
+        "weight": 0.05,
+        "options": {
+          "≤ 0.2x": 10.0,
+          "0.21x – 0.5x": 6.0,
+          "0.51x – 1.0x": 3.0,
+          "> 1.0x": 0.0,
+          "No information available": 5.0
+        }
+      },
+      "Document Expiry Risk": {
+        "weight": 0.02,
+        "options": {
+          "> 90 days validity": 10.0,
+          "30–90 days": 6.0,
+          "<30 days": 2.0,
+          "Expired": 0.0
+        }
+      },
+      "Gross Profit Margin (GPM) - Financial Statements": {
+        "weight": 0.05,
+        "options": {
+          "≥10%": 10.0,
+          "5–9.99%": 7.0,
+          "2–4.99%": 4.0,
+          "<2%": 0.0
+        }
+      },
+      "Last Transaction Recency with Sary/SilQ": {
+        "weight": 0.13,
+        "options": {
+          "≤30 days": 10.0,
+          "31–60 days": 7.0,
+          "61–90 days": 4.0,
+          ">90 days": 0.0
+        }
+      },
+      "Legal Structure": {
+        "weight": 0.04,
+        "options": {
+          "JSC": 10.0,
+          "LLC": 8.0,
+          "1-Person LLC": 6.0,
+          "Partnership": 4.0,
+          "Establishment": 2.0,
+          "Unknown": 0.0
+        }
+      },
+      "National Address Match": {
+        "weight": 0.02,
+        "options": {
+          "Full": 10.0,
+          "Minor Mismatch": 6.0,
+          "Different": 0.0
+        }
+      },
+      "Net Profit Margin (NPM) - Financial Statements": {
+        "weight": 0.05,
+        "options": {
+          "≥5%": 10.0,
+          "2–4.99%": 7.0,
+          "0–1.99%": 4.0,
+          "<0%": 0.0
+        }
+      },
+      "Owner–Manager Match": {
+        "weight": 0.02,
+        "options": {
+          "Full Match": 10.0,
+          "Partial Match": 6.0,
+          "Mismatch": 0.0
+        }
+      },
+      "Relationship with Sary/SilQ (Based on No. of Transactions Only)": {
+        "weight": 0.13,
+        "options": {
+          "≥20": 10.0,
+          "11–19": 7.0,
+          "5–10": 4.0,
+          "<5": 0.0
+        }
+      },
+      "SIMAH (Business) – Defaults": {
+        "weight": 0.1,
+        "options": {
+          "No defaults ever reported": 10.0,
+          "Defaults occurred in past but now settled": 5.0,
+          "Currently defaulted": 0.0,
+          "Blank SIMAH report": 5.0
+        }
+      },
+      "SIMAH (Business) – Facility-to-Lender Ratio": {
+        "weight": 0.05,
+        "options": {
+          "≤1.5": 10.0,
+          "1.6–2.5": 6.0,
+          ">2.5": 3.0
+        }
+      },
+      "SIMAH (Owner) – Score": {
+        "weight": 0.1,
+        "options": {
+          "≥750": 10.0,
+          "700–749": 8.0,
+          "650–699": 6.0,
+          "600–649": 4.0,
+          "550–599": 2.0,
+          "<550": 0.0,
+          "Score Not Available": 4.0
+        }
+      },
+      "Saudization Band": {
+        "weight": 0.02,
+        "options": {
+          "High Green": 10.0,
+          "Medium": 8.0,
+          "Low": 6.0,
+          "Yellow": 3.0,
+          "Red": 0.0
+        }
+      }
+    },
+    "Tier 4 : EDP": {
+      "Business Age (Months)": {
+        "weight": 0.2,
+        "options": {
+          "≥60": 10.0,
+          "48–59": 9.0,
+          "36–47": 8.0,
+          "24–35": 6.0,
+          "12–23": 4.0,
+          "6–11": 2.0,
+          "<6": 0.0
+        }
+      },
+      "CR Status (Active/Expired)": {
+        "weight": 0.02,
+        "options": {
+          "Active": 10.0,
+          "Expired": 0.0
+        }
+      },
+      "Current Ratio (CR) - Financial Statements": {
+        "weight": 0.05,
+        "options": {
+          "≥1.5": 10.0,
+          "1.0 – 1.49": 7.0,
+          "0.75 – 0.99": 4.0,
+          "<0.75": 0.0
+        }
+      },
+      "Debt Capacity-to-Sales Ratio": {
+        "weight": 0.05,
+        "options": {
+          "≤ 0.2x": 10.0,
+          "0.21x – 0.5x": 6.0,
+          "0.51x – 1.0x": 3.0,
+          "> 1.0x": 0.0,
+          "No information available": 5.0
+        }
+      },
+      "Debt-to-Equity Ratio (D/E) - Financial Statements": {
+        "weight": 0.05,
+        "options": {
+          "<1.0": 10.0,
+          "1.0 – 1.99": 7.0,
+          "2.0 – 2.99": 4.0,
+          "≥3.0": 0.0
+        }
+      },
+      "Document Expiry Risk": {
+        "weight": 0.02,
+        "options": {
+          "> 90 days validity": 10.0,
+          "30–90 days": 6.0,
+          "<30 days": 2.0,
+          "Expired": 0.0
+        }
+      },
+      "Gross Profit Margin (GPM) - Financial Statements": {
+        "weight": 0.05,
+        "options": {
+          "≥10%": 10.0,
+          "5–9.99%": 7.0,
+          "2–4.99%": 4.0,
+          "<2%": 0.0
+        }
+      },
+      "Last Transaction Recency with Sary/SilQ": {
+        "weight": 0.08,
+        "options": {
+          "≤30 days": 10.0,
+          "31–60 days": 7.0,
+          "61–90 days": 4.0,
+          ">90 days": 0.0
+        }
+      },
+      "Legal Structure": {
+        "weight": 0.04,
+        "options": {
+          "JSC": 10.0,
+          "LLC": 8.0,
+          "1-Person LLC": 6.0,
+          "Partnership": 4.0,
+          "Establishment": 2.0,
+          "Unknown": 0.0
+        }
+      },
+      "National Address Match": {
+        "weight": 0.02,
+        "options": {
+          "Full": 10.0,
+          "Minor Mismatch": 6.0,
+          "Different": 0.0
+        }
+      },
+      "Net Profit Margin (NPM) - Financial Statements": {
+        "weight": 0.05,
+        "options": {
+          "≥5%": 10.0,
+          "2–4.99%": 7.0,
+          "0–1.99%": 4.0,
+          "<0%": 0.0
+        }
+      },
+      "Owner–Manager Match": {
+        "weight": 0.02,
+        "options": {
+          "Full Match": 10.0,
+          "Partial Match": 6.0,
+          "Mismatch": 0.0
+        }
+      },
+      "Relationship with Sary/SilQ (Based on No. of Transactions Only)": {
+        "weight": 0.08,
+        "options": {
+          "≥20": 10.0,
+          "11–19": 7.0,
+          "5–10": 4.0,
+          "<5": 0.0
+        }
+      },
+      "SIMAH (Business) – Defaults": {
+        "weight": 0.1,
+        "options": {
+          "No defaults ever reported": 10.0,
+          "Defaults occurred in past but now settled": 5.0,
+          "Currently defaulted": 0.0,
+          "Blank SIMAH report": 5.0
+        }
+      },
+      "SIMAH (Business) – Facility-to-Lender Ratio": {
+        "weight": 0.05,
+        "options": {
+          "≤1.5": 10.0,
+          "1.6–2.5": 6.0,
+          ">2.5": 3.0
+        }
+      },
+      "SIMAH (Owner) – Score": {
+        "weight": 0.1,
+        "options": {
+          "≥750": 10.0,
+          "700–749": 8.0,
+          "650–699": 6.0,
+          "600–649": 4.0,
+          "550–599": 2.0,
+          "<550": 0.0,
+          "Score Not Available": 4.0
+        }
+      },
+      "Saudization Band": {
+        "weight": 0.02,
+        "options": {
+          "High Green": 10.0,
+          "Medium": 8.0,
+          "Low": 6.0,
+          "Yellow": 3.0,
+          "Red": 0.0
+        }
+      }
+    }
+  }
+}
